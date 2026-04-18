@@ -3,7 +3,10 @@ import sys
 import json
 import hashlib
 
-tty_path = sys.argv[1]
+def _get_tty_path() -> str:
+    if len(sys.argv) > 1:
+        return sys.argv[1]
+    return "/dev/stderr"
 def compute_doc_hash(lines: list[str]) -> str:
     """
     Overleaf hashes the document as the full text joined by newlines.
@@ -19,6 +22,7 @@ def cookies_to_header(cookie_jar):
     return key
 
 def print_other_terminal(arg):
+    tty_path = _get_tty_path()
     with open(tty_path, "w") as tty:
         pprint(arg, tty)
 

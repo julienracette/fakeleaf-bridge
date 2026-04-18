@@ -1,4 +1,12 @@
 data/
+dist/
+build/
+*.egg-info/
+
+venv/
 env/
+
+*.pem
+
 config/
 __pycache__/

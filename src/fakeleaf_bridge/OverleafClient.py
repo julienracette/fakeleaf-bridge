@@ -19,9 +19,9 @@ import asyncio
 import zipfile
 
 
-from constants import Route, Path
-from utility import cookies_to_header
-from OverleafWS import OverleafWS
+from .constants import Route, Path
+from .utility import cookies_to_header
+from .OverleafWS import OverleafWS
 
 class OverleafClient:
     def __init__(self,debug=False) -> None:

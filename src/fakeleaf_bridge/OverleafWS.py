@@ -1,7 +1,8 @@
 import asyncio
 import json
 import websockets
-from utility import print_other_terminal, parse_sharejs_ot,compute_doc_hash
+
+from .utility import print_other_terminal, parse_sharejs_ot,compute_doc_hash
 
 
 class OverleafWS:
