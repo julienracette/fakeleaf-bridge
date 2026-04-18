@@ -94,7 +94,7 @@ This starts the backend process, which communicates with Neovim.
 
 Frontend:
 
-* https://github.com/yourname/fakeleaf.nvim
+* https://github.com/julienracette/fakeleaf.nvim
 
 ---
 
