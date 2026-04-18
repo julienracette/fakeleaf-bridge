@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "overleaf-bridge"
+name = "fakeleaf-bridge"
 version = "0.1.0"
 description = "Python bridge for fakeleaf.nvim (Overleaf integration)"
 authors = [
@@ -14,8 +14,15 @@ requires-python = ">=3.8"
 
 dependencies = [
   "websockets",
-  "aiohttp"
+  "aiohttp",
+  "cloudscraper",
+  "browser-cookie3",
+  "beautifulsoup4",
+  "requests",
 ]
 
 [project.scripts]
-overleaf-bridge = "overleaf_bridge.bridge:main"
+fakeleaf-bridge = "fakeleaf_bridge.bridge:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
