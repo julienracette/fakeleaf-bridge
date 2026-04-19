@@ -71,11 +71,8 @@ class OverleafClient:
 
     @selected_id.setter
     def selected_id(self, value):
-        try:
-            self._selected_name = self._projects[value]
-            self._selected_id = value
-        except Exception as e:
-            raise e
+        self._selected_name = self._projects[value]
+        self._selected_id = value
 
 
     def __get(self,url:str,stream=False):
@@ -86,10 +83,7 @@ class OverleafClient:
         return response
 
     def fetch_all_projects(self):
-        ts = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         response = self.__get(Route.MAIN + Route.PROJECT)
-        with open(f"{Path.RESPONSE}overleaf_fetch_project_{ts}.html","w+") as file:
-            file.write(response.text)
         self.raw_data = self._parse_project_names(response)
         for p in self.raw_data["projects"]:
             self._projects[p["id"]] = p["name"]
@@ -105,8 +99,6 @@ class OverleafClient:
 
         parts = response.text.split(":")
         token = parts[0]
-        if self.debug:
-            print(f"Got token: {token}")
         return token
 
 
