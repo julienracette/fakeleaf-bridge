@@ -7,6 +7,7 @@ venv/
 env/
 
 *.pem
+poetry.lock
 
 config/
 __pycache__/

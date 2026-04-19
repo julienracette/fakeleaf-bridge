@@ -7,39 +7,32 @@ def _get_tty_path() -> str:
     if len(sys.argv) > 1:
         return sys.argv[1]
     return "/dev/stderr"
+
 def compute_doc_hash(lines: list[str]) -> str:
-    """
-    Overleaf hashes the document as the full text joined by newlines.
-    Matches: crypto.createHash('sha1').update(content).digest('hex')
-    """
     content = "\n".join(lines)
     return hashlib.sha1(content.encode("utf-8")).hexdigest()
 
-def cookies_to_header(cookie_jar):
+def cookies_to_header(cookie_jar) -> str:
     key = ""
     for c in cookie_jar:
          key += f"{c.name}={c.value}; "
     return key
 
-def print_other_terminal(arg):
+def print_other_terminal(arg,debug = True) -> None:
+    if not debug:
+        return
     tty_path = _get_tty_path()
+    if tty_path == "/dev/stderr":
+        pprint(arg)
     with open(tty_path, "w") as tty:
         pprint(arg, tty)
 
+
 def parse_sharejs_ot(raw: str) -> dict:
-    """
-    Parse a ShareJS Operational Transformation string into a structured dict.
-    
-    Op types:
-      - Plain number (e.g. "1"): retain/skip N characters
-      - "N+[...]": insert operation
-      - "N-[...]": delete operation
-    """
     inner = raw.strip("()'")
 
     bracket_idx = inner.find("[")
 
-    # No array — it's a plain retain/skip op (just a number)
     if bracket_idx == -1:
         try:
             return {
