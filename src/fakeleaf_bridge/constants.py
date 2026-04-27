@@ -11,11 +11,3 @@ class Route(str,Enum):
     def __str__(self):
         return self.value
 
-class Path(str,Enum):
-    RESPONSE= "data/response/"
-    TEMP="data/temp/"
-    PROJECT = "data/projects/"
-
-    def __str__(self):
-        return self.value
-
